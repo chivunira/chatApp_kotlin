@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557139055493",
+    "project_id": "login-register-testt",
+    "storage_bucket": "login-register-testt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557139055493:android:28ef3044d64b0659f4eaec",
+        "android_client_info": {
+          "package_name": "com.example.login_registration_kotlin_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuglZPWykzjr6KgyUCZS2Z0wD5a6GtGf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
