@@ -1,46 +1,41 @@
 package com.example.login_registration_kotlin_firebase
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView  // Import TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.login_registration_kotlin_firebase.ui.theme.Login_registration_kotlin_firebaseTheme
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var button: Button
+    private lateinit var textview: TextView  // Change Text to TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Login_registration_kotlin_firebaseTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        auth = FirebaseAuth.getInstance()
+        button = findViewById(R.id.logout)
+        textview = findViewById(R.id.user_details)
+
+        val user = auth.currentUser // Retrieve the current user
+
+        if (user == null) {
+            val intent = Intent(applicationContext, Login::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            textview.text = user.email // Use text property to set text
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Login_registration_kotlin_firebaseTheme {
-        Greeting("Android")
+        button.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(applicationContext, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
